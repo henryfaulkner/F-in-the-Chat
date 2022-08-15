@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.3"
+    "@tsconfig/node16": "^1.0.3",
+    "http-server": "^14.1.1"
   }
 }
