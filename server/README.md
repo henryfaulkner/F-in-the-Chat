@@ -5,6 +5,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocke
 - currently running program as root user, using sudo command,
   to connect to ports lower than 1024
 
+$dotnet build
+$sudo dotnet run --project WebSocketServer/WebSocketServer.csproj
+
 #### Handshake
 
 The full explanation of the Server handshake can be found in RFC 6455, section 4.2.2.
