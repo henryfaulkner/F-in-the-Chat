@@ -17,3 +17,11 @@ Steps:
 2. Concatenate it with "258EAFA5-E914-47DA-95CA-C5AB0DC85B11" (a special GUID specified by RFC 6455)
 3. Compute SHA-1 and Base64 hash of the new value
 4. Write the hash back as the value of "Sec-WebSocket-Accept" response header in an HTTP response
+
+### Script to install dotnet to Raspberry Pi
+
+https://www.petecodes.co.uk/install-and-use-microsoft-dot-net-6-with-the-raspberry-pi/
+
+### Install Iot.Device.Binding to WebSocketServer
+
+$dotnet add package Iot.Device.Bindings --version 2.1.0

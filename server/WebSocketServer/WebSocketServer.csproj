@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Iot.Device.Bindings" Version="2.1.0" />
+  </ItemGroup>
+
 </Project>

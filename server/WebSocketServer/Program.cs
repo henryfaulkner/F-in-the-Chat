@@ -9,7 +9,6 @@ namespace WebSocketServer
 {
     public class Program
     {
-        
         private static void TCPHandshake(TcpClient client, ref NetworkStream stream) 
         {
             //wait for enough bytes to be available
@@ -79,19 +78,21 @@ namespace WebSocketServer
         public static void Main(string[] args)
         {
             //server implementation
-            TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 80);
+            TcpListener server = new TcpListener(IPAddress.Parse("{lan}"), 80);
             server.Start();
-            Console.WriteLine("Server has started on 127.0.0.1:80. Waiting for a connection…\n");
+            Console.WriteLine("Server has started on {lan}:80. Waiting for a connection…\n");
             //triggers when a client connects
             TcpClient client = server.AcceptTcpClient();
             Console.WriteLine("A client connected.");
 
+            LightModule lm = new LightModule();
             NetworkStream stream = client.GetStream();
             //enter to an infinite cycle to be able to handle every change in stream
             while(true) {
                 //traps here until some bytes of data have been sent
                 while(!stream.DataAvailable);
                 TCPHandshake(client, ref stream);
+                lm.BlinkLights(18);
             }
         }
     }
