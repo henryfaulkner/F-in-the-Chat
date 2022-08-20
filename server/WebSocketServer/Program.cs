@@ -125,7 +125,7 @@ namespace WebSocketServer
                     Console.WriteLine("Turn Off.");
                     on = false;
                 } else {
-                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/__main__.py");
+                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/rainbow.py");
                     Console.WriteLine("Turn on.");
                     on = true;
                 }
