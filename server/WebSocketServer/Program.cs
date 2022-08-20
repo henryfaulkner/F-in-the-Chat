@@ -2,6 +2,8 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 
@@ -75,6 +77,32 @@ namespace WebSocketServer
             }
         }
 
+        private static void RunPython(string pathToPythonFile) {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "/usr/bin/python3";
+            start.Arguments = pathToPythonFile;
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using(Process process = Process.Start(start)) {
+                using(StreamReader reader = process.StandardOutput) {
+                    Console.Write(reader.ReadToEnd());
+                }
+            } 
+        }
+
+        private static void RunPython(string pathToPythonFile, string args) {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "/usr/bin/python3";
+            start.Arguments = string.Format("{0} {1}", pathToPythonFile, args);
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using(Process process = Process.Start(start)) {
+                using(StreamReader reader = process.StandardOutput) {
+                    Console.Write(reader.ReadToEnd());
+                }
+            } 
+        }
+
         public static void Main(string[] args)
         {
             //server implementation
@@ -87,12 +115,21 @@ namespace WebSocketServer
 
             LightModule lm = new LightModule();
             NetworkStream stream = client.GetStream();
+            bool on = false;
             //enter to an infinite cycle to be able to handle every change in stream
             while(true) {
                 //traps here until some bytes of data have been sent
                 while(!stream.DataAvailable);
                 TCPHandshake(client, ref stream);
-                lm.BlinkLights(18);
+                if(on) {
+                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/off.py");
+                    Console.WriteLine("Turn Off.");
+                    on = false;
+                } else {
+                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/__main__.py");
+                    Console.WriteLine("Turn on.");
+                    on = true;
+                }
             }
         }
     }
