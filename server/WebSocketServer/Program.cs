@@ -112,9 +112,8 @@ namespace WebSocketServer
             //triggers when a client connects
             TcpClient client = server.AcceptTcpClient();
             Console.WriteLine("A client connected.");
-
-            LightModule lm = new LightModule();
             NetworkStream stream = client.GetStream();
+            
             bool on = false;
             //enter to an infinite cycle to be able to handle every change in stream
             while(true) {
