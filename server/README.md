@@ -22,6 +22,11 @@ Steps:
 
 https://www.petecodes.co.uk/install-and-use-microsoft-dot-net-6-with-the-raspberry-pi/
 
+### .NET Core version
+
+Raspberry Pi needs netcoreapp6.0
+Mac needs netcoreapp3.1
+
 ### Install Iot.Device.Binding to WebSocketServer
 
 $dotnet add package Iot.Device.Bindings --version 2.1.0
