@@ -121,10 +121,12 @@ namespace WebSocketServer
                 while(!stream.DataAvailable);
                 TCPHandshake(client, ref stream);
                 if(on) {
+                    // absolute path of file
                     RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/off.py");
                     Console.WriteLine("Turn Off.");
                     on = false;
                 } else {
+                    // absolute path of file
                     RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/rainbow.py");
                     Console.WriteLine("Turn on.");
                     on = true;

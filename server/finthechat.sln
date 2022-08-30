@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer", "WebSocketServer\WebSocketServer.csproj", "{18E33F42-66A6-421E-AA71-4E11F4AB4DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,17 +30,5 @@ Global
 		{18E33F42-66A6-421E-AA71-4E11F4AB4DFC}.Release|x64.Build.0 = Release|Any CPU
 		{18E33F42-66A6-421E-AA71-4E11F4AB4DFC}.Release|x86.ActiveCfg = Release|Any CPU
 		{18E33F42-66A6-421E-AA71-4E11F4AB4DFC}.Release|x86.Build.0 = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|x64.Build.0 = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Debug|x86.Build.0 = Debug|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|x64.ActiveCfg = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|x64.Build.0 = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|x86.ActiveCfg = Release|Any CPU
-		{5E2C2146-2D55-43EB-B1C7-6AC99F08061D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
