@@ -7,6 +7,6 @@ https://www.youtube.com/watch?v=Ao5XcORsYxA&t=197s
 - Had to downgrade to esp8266 2.3 version for upload to work
 - If you receive "error: espcomm_upload_mem failed," unplug Arduino and plug back in
 
-### Repo if we ever need to have ESP run the websocket server as well
+### Repo which helped with C++ WebSocket
 
 https://github.com/morrissinger/ESP8266-Websocket
