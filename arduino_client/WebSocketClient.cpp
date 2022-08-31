@@ -30,6 +30,7 @@ bool WebSocketClient::handshake(Client &client)
         }
         else
         {
+          Serial.println("analyzeRequest() was false");
             // Might just need to break until out of socket_client loop.
 #ifdef DEBUGGING
             Serial.println(F("Invalid handshake"));
@@ -75,6 +76,22 @@ bool WebSocketClient::analyzeRequest()
     Serial.println(F("Sending websocket upgrade headers"));
 #endif
 
+    Serial.println(F("GET "));
+    Serial.println(path);
+    Serial.println(F(" HTTP/1.1\r\n"));
+    Serial.println(F("Upgrade: websocket\r\n"));
+    Serial.println(F("Connection: Upgrade\r\n"));
+    Serial.println(F("Host: "));
+    Serial.println(host);
+    Serial.println(CRLF);
+    Serial.println(F("Sec-WebSocket-Key: "));
+    Serial.println(key);
+    Serial.println(CRLF);
+    Serial.println(F("Sec-WebSocket-Protocol: "));
+    Serial.println(protocol);
+    Serial.println(CRLF);
+    Serial.println(F("Sec-WebSocket-Version: 13\r\n"));
+    Serial.println(CRLF);
     socket_client->print(F("GET "));
     socket_client->print(path);
     socket_client->print(F(" HTTP/1.1\r\n"));
@@ -153,6 +170,11 @@ bool WebSocketClient::analyzeRequest()
     base64_encode(b64Result, result, 20);
 
     // if the keys match, good to go
+    Serial.println("serverKey");
+    Serial.println(serverKey);
+    Serial.println("String(b64Result)");
+    Serial.println(String(b64Result));
+    
     return serverKey.equals(String(b64Result));
 }
 

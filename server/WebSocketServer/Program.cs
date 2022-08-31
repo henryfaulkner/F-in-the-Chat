@@ -19,6 +19,7 @@ namespace WebSocketServer
             stream.Read(bytes, 0, bytes.Length);
             String data = Encoding.UTF8.GetString(bytes);
             if(Regex.IsMatch(data, "^GET")) {
+                Console.WriteLine("Matched GET");
                 /*
                 1. Obtain the value of the "Sec-WebSocket-Key" request header without any leading or trailing whitespace
                 2. Concatenate it with "258EAFA5-E914-47DA-95CA-C5AB0DC85B11" (a special GUID specified by RFC 6455)
@@ -37,9 +38,12 @@ namespace WebSocketServer
                     + "Upgrade: websocket" + eol
                     + "Sec-WebSocket-Accept: " + swkaSha1Base64 + eol
                     + eol);
+                Console.WriteLine("response");
+                Console.WriteLine(System.Text.Encoding.UTF8.GetString(response));
 
                 stream.Write(response, 0, response.Length);
             } else {
+                Console.WriteLine("Not matched GET");
                 bool fin = (bytes[0] & 0b10000000) != 0,
                     mask = (bytes[1] & 0b10000000) != 0; // must be true, "All messages from the client to the server have this bit set"
                 int opcode = bytes[0] & 0b00001111, // expecting 1 - text message
@@ -122,13 +126,13 @@ namespace WebSocketServer
                 TCPHandshake(client, ref stream);
                 if(on) {
                     // absolute path of file
-                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/off.py");
-                    Console.WriteLine("Turn Off.");
+                    //RunPython("/Users/henryfaulkner/Desktop/Projects/F-in-the-Chat/server/python/off.py");
+                    //Console.WriteLine("Turn Off.");
                     on = false;
                 } else {
                     // absolute path of file
-                    RunPython("/home/pi/Desktop/F-in-the-Chat/server/python/rainbow.py");
-                    Console.WriteLine("Turn on.");
+                    //RunPython("/Users/henryfaulkner/Desktop/Projects/F-in-the-Chat/server/python/rainbow.py");
+                    //Console.WriteLine("Turn on.");
                     on = true;
                 }
             }
