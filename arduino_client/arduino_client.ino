@@ -1,26 +1,23 @@
 #include <ESP8266WiFi.h>=
 
-const char *ssid = "Kleins Guys";
-const char *password = "Redbirds901FC";
+const char *ssid = "";
+const char *password = "";
 char path[] = "/";
-char host[] = "ws://10.0.0.227/";
+char host[] = "ws:///";
 
 // Use WiFiClient class to create TCP connections
 WiFiClient client;
 int buttonState = 0;
 bool on = false;
-int BUTTON_PIN = 2;
+int BUTTON_PIN = 3; // Using RX pin for general boolean input
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200,SERIAL_8N1,SERIAL_TX_ONLY); // TX pin taking responsibility of Serial
   pinMode(BUTTON_PIN, INPUT);
   delay(10);
 
   // We start by connecting to a WiFi network
-
-  Serial.println();
-  Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
@@ -40,9 +37,26 @@ void setup()
   delay(5000);
 
   // Connect to the websocket server
-  if (client.connect("10.0.0.227", 80))
+  if (client.connect("", 80))
   {
     Serial.println("Connected");
+    buttonState = digitalRead(BUTTON_PIN);
+    Serial.println("buttonState");
+    Serial.println(buttonState);
+    if(buttonState == 0) {
+      if(!on) {
+        on = true;
+        client.println("on");
+        Serial.println("down");
+      }
+    } else {
+      if(on) {
+        Serial.println("up");
+        client.println("off");
+        on = false;
+      }
+    }
+    delay(50);
   }
   else
   {

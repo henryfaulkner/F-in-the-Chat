@@ -116,9 +116,9 @@ namespace WebSocketServer
         public static void Main(string[] args)
         {
             //server implementation
-            TcpListener server = new TcpListener(IPAddress.Parse("10.0.0.227"), 80);
+            TcpListener server = new TcpListener(IPAddress.Parse(""), 80);
             server.Start();
-            Console.WriteLine("Server has started on 10.0.0.227:80. Waiting for a connection…\n");
+            Console.WriteLine("Server has started on :80. Waiting for a connection…\n");
             //triggers when a client connects
             TcpClient client = server.AcceptTcpClient();
             Console.WriteLine("A client connected.");
