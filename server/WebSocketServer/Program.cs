@@ -81,6 +81,12 @@ namespace WebSocketServer
             }
         }
 
+        private static string ReadTransmission(TcpClient client, NetworkStream stream) {
+            Byte[] bytes = new Byte[client.Available];
+            stream.Read(bytes, 0, bytes.Length);
+            return Encoding.UTF8.GetString(bytes);
+        }
+
         private static void RunPython(string pathToPythonFile) {
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "/usr/bin/python3";
@@ -110,9 +116,9 @@ namespace WebSocketServer
         public static void Main(string[] args)
         {
             //server implementation
-            TcpListener server = new TcpListener(IPAddress.Parse("{lan}"), 80);
+            TcpListener server = new TcpListener(IPAddress.Parse("10.0.0.227"), 80);
             server.Start();
-            Console.WriteLine("Server has started on {lan}:80. Waiting for a connection…\n");
+            Console.WriteLine("Server has started on 10.0.0.227:80. Waiting for a connection…\n");
             //triggers when a client connects
             TcpClient client = server.AcceptTcpClient();
             Console.WriteLine("A client connected.");
@@ -123,7 +129,8 @@ namespace WebSocketServer
             while(true) {
                 //traps here until some bytes of data have been sent
                 while(!stream.DataAvailable);
-                TCPHandshake(client, ref stream);
+                //TCPHandshake(client, ref stream);
+                Console.WriteLine(ReadTransmission(client, stream));
                 if(on) {
                     // absolute path of file
                     //RunPython("/Users/henryfaulkner/Desktop/Projects/F-in-the-Chat/server/python/off.py");

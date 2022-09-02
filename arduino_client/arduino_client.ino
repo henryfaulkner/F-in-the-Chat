@@ -1,12 +1,9 @@
-#include <ESP8266WiFi.h>
-#include "WebSocketClient.h"
+#include <ESP8266WiFi.h>=
 
 const char *ssid = "Kleins Guys";
 const char *password = "Redbirds901FC";
 char path[] = "/";
 char host[] = "ws://10.0.0.227/";
-
-WebSocketClient webSocketClient;
 
 // Use WiFiClient class to create TCP connections
 WiFiClient client;
@@ -55,63 +52,28 @@ void setup()
       // Hang on failure
     }
   }
-
-  // Handshake with the server
-  webSocketClient.path = path;
-  webSocketClient.host = host;
-  if (webSocketClient.handshake(client))
-  {
-    Serial.println("Handshake successful");
-  }
-  else
-  {
-    Serial.println("Handshake failed.");
-    while (1)
-    {
-      // Hang on failure
-    }
-  }
 }
 
 void loop()
 {
-  String data;
-
-  buttonState = digitalRead(BUTTON_PIN);
-  if (buttonState == 0)
-  {
-    if (!on)
-    {
-      on = true;
-      //webSocketClient.sendData("off");
-      Serial.println("down");
-    }
-  }
-  else
-  {
-    if (on)
-    {
-      Serial.println("up");
-      //webSocketClient.sendData("off");
-      on = false;
-    }
-  }
-  delay(50);
-
   if (client.connected())
   {
-    Serial.println("connected");
-    webSocketClient.getData(data);
-    if (data.length() > 0)
-    {
-      Serial.print("Received data: ");
-      Serial.println(data);
+    //Serial.println("connected");
+    buttonState = digitalRead(BUTTON_PIN);
+    if(buttonState == 0) {
+      if(!on) {
+        on = true;
+        Serial.println("down");
+        client.println("on");
+      }
+    } else {
+      if(on) {
+        on = false;
+        Serial.println("up");
+        client.println("off");
+      }
     }
-    
-    pinMode(1, INPUT);
-    data = String(analogRead(1));
-    
-    webSocketClient.sendData(data);
+    delay(50);
   }
   else
   {
